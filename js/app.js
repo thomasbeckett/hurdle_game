@@ -22,19 +22,26 @@ $(document).ready(function(){
   //obstacle
   var obs = 0;
 
-  var obstacleObject = generateObstacle();
-
+  // var obstacleObject = generateObstacle();
+  //
   var obstacleSpeed = 0.2;
-  var newObs = generateObstacle();
-  $(newObs.id).hide();
 
+  // randomly generate obstacles
+  var obstacleArray = [];
+  var newObs = generateObstacle();
+  obstacleArray.push(newObs);
+  console.log(obstacleArray);
+  interval3 = setInterval(function(){
+    var newObs = generateObstacle();
+    obstacleArray.push(newObs);
+    console.log(obstacleArray);
+  },1000)
 
   interval2 = setInterval(function(){
-    moveObstacle(obstacleObject);
-    setTimeout(function(){
-      $(newObs.id).show();
-      moveObstacle(newObs)
-    },2000);
+    for(o of obstacleArray){
+      moveObstacle(o)
+    }
+
   },5);
 
   var yacceleration = 0.05;
@@ -44,9 +51,6 @@ $(document).ready(function(){
 
 
   var jumping = false;
-
-
-
 
   if(jumping == false) {
      $("body").keydown(function (e) {
@@ -162,6 +166,8 @@ $(document).ready(function(){
       console.log("over");
       clearInterval(interval2)
       obstacleSpeed=0;
+      clearInterval(interval2)
+      clearInterval(interval3)
     }
   };
 
