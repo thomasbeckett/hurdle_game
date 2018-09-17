@@ -51,26 +51,30 @@ $(document).ready(function(){
   var yacceleration = 1;
   var yvelocity = -4.5;
 
-  var ypos = 270;
-
+  var ypos;
 
   var jumping = false;
+  var pressed = false;
 
-  if(jumping == false) {
-     $("body").keydown(function (e) {
-       if(e.keyCode == 32){
-         jump();
-         jumping = true;
-         yacceleration = 0.08;
-         yvelocity = -5;
-         ypos = 270;
-       }
+  if(jumping == false){
+    console.log(pressed);
+    $("body").keydown(function (e) {
+      if(e.keyCode == 32 && pressed == false){
+        jump();
+        jumping = true;
+        yacceleration = 0.08;
+        yvelocity = -5;
+        ypos = 270;
+        pressed = true;
+      }
 
-     });
-   }
+    });
+  }
 
    function generateObstacle(){
+     //get a new obstacle id
      var newId = "#obstacle" + obs
+     //create a new object
      var newObstacle = {
        id: newId,
        class: ".barrier",
@@ -78,8 +82,8 @@ $(document).ready(function(){
        top: 0,
        xpos: 96
      }
+     //create a new div
      $("#obstacles").append("<div id='obstacle"+obs+"' class='barrier'></div>")
-     $(newObstacle.id).css({"left":"90%"})
      obs++
      return(newObstacle);
    }
@@ -91,7 +95,7 @@ $(document).ready(function(){
       characterPosition();
       boardPosition();
 
-      //on spacebar move the character
+      //move the character and check if it has hit the ground
       setCharPos();
       move();
       verticalCollisions();
@@ -106,13 +110,10 @@ $(document).ready(function(){
     });
   }
 
-
   function move(){
     yvelocity += yacceleration;
     ypos+=yvelocity;
   };
-
-
 
   function characterPosition(){
     // Find the left and top edge of the character
@@ -138,34 +139,30 @@ $(document).ready(function(){
     // Find the left and top edge of the obstacle
     object.left = $(object.id).offset().left;
     object.top = $(object.id).offset().top;
-    // console.log(object);
 
-
-    // Find right and bottom edge of the obstacle
-    // obstacleRight = obstacleLeft + obstacle.width();
-    // obstacleBott = obstacleTop + obstacle.height();
   }
 
 
 
   function verticalCollisions(){
+    //jump
     if (jumping == true) {
       jumping = false;
-
+    //land on ground
     }else{
       if (characterBott >= boardBott) {
         clearInterval(interval);
-      // console.log(3);
       yvelocity = 0;
       yacceleration = 0;
       ypos = 290;
       setCharPos();
-      // console.log(interval);
+      pressed = false;
       }
     }
   }
 
   function horizontalCollisions(object){
+    //if object and character collide end the game
     if (characterRight >= object.left && characterBott >= object.top && object.left >= 100) {
       console.log("over");
       clearInterval(interval2)
@@ -178,16 +175,19 @@ $(document).ready(function(){
 
   function moveObstacle(object){
 
+      //get postitions
       obstaclePosition(object);
-
       characterPosition();
+
       object.xpos -= obstacleSpeed;
-      // console.log(object.id);
+      //set object position
       $(object.id).css({
         "left": object.xpos + "%"
       });
+      //check if object has collided
       horizontalCollisions(object);
 
+      //check if object is out of the container
       hideCheck(object);
 
 
@@ -195,7 +195,6 @@ $(document).ready(function(){
   };
 
   function hideCheck(object){
-    // console.log(object.left);
     if(object.left <=50){
       $(object.id).hide();
     }
