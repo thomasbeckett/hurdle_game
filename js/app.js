@@ -20,23 +20,26 @@ $(document).ready(function(){
   var boardBott;
 
   var yacceleration = 0.05;
-  var yvelocity = -5;
+  var yvelocity = -4.5;
 
-  var ypos = 250;
+  var ypos = 270;
 
   var jumping = false;
-   // $("#btn").click(game);
-   //while(jumping == false){
-   $("body").keydown(function (e) {
-     if(e.keyCode == 32){
-       game();
-       jumping = true;
-     }
 
-   });
- //};
+  if(jumping == false) {
+     $("body").keydown(function (e) {
+       if(e.keyCode == 32){
+         game();
+         jumping = true;
+         yacceleration = 0.05;
+         yvelocity = -4.5;
+         ypos = 270;
+       }
 
-  //game();
+     });
+
+   }
+
   function game(){
 
     interval = setInterval(function(){
@@ -47,22 +50,19 @@ $(document).ready(function(){
 
       //on spacebar move the character
 
-      character.css({
-        "top": ypos + "px"
-      });
+      setCharPos();
       move();
       verticalCollisions();
-      // $("body").keydown(function (e) {
-      //   if(e.keyCode == 32){
-      //     jump();
-      //     jumping = true;
-      //   }
-      //
-      // });
 
       //move the obstacles
 
     },5)
+  }
+
+  function setCharPos(){
+    character.css({
+      "top": ypos + "px"
+    });
   }
 
 
@@ -97,15 +97,17 @@ $(document).ready(function(){
 
   function verticalCollisions(){
     if (jumping == true) {
-      console.log(2);
       jumping = false;
 
     }else{
       if (characterBott >= boardBott) {
-        console.log(3);
+        clearInterval(interval);
+      // console.log(3);
       yvelocity = 0;
       yacceleration = 0;
-      ypos = 280;
+      ypos = 290;
+      setCharPos();
+      console.log(interval);
       }
     }
   }
