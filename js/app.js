@@ -19,12 +19,18 @@ $(document).ready(function(){
   var boardTop;
   var boardBott;
 
+  //obstacle
+  var obstacle = $("#obstacle")
+
   var yacceleration = 0.05;
   var yvelocity = -4.5;
 
   var ypos = 270;
+  var xpos = 700;
 
   var jumping = false;
+
+  moveObstacle();
 
   if(jumping == false) {
      $("body").keydown(function (e) {
@@ -112,6 +118,20 @@ $(document).ready(function(){
     }
   }
 
+
+  function moveObstacle(){
+    interval2 = setInterval(function(){
+      boardPosition();
+      console.log(1);
+      xpos -= 1;
+      obstacle.css({
+        "left": xpos + "px"
+      });
+    });
+
+
+
+  };
 
 
 
