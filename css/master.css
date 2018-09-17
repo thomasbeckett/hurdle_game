@@ -1,0 +1,22 @@
+body {
+  text-align: center;
+  margin: 100px auto
+}
+
+.container {
+  width:90vw;
+  height:350px;
+  margin: 10% auto;
+  background: #999;
+  border-radius: 1em;
+  position: relative;
+}
+
+.character{
+  height:70px;
+  width:30px;
+  background: lime;
+  position: absolute;
+  bottom: 0;
+  left: 100px;
+}
