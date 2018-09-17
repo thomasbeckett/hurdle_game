@@ -28,14 +28,18 @@ $(document).ready(function(){
 
   // randomly generate obstacles
   var obstacleArray = [];
-  var newObs = generateObstacle();
-  obstacleArray.push(newObs);
-  console.log(obstacleArray);
+  // var newObs = generateObstacle();
+  // obstacleArray.push(newObs);
+  // console.log(obstacleArray);
   interval3 = setInterval(function(){
-    var newObs = generateObstacle();
-    obstacleArray.push(newObs);
-    console.log(obstacleArray);
-  },1000)
+    var num = Math.random();
+    if(num < 0.7){
+      var newObs = generateObstacle();
+      obstacleArray.push(newObs);
+      console.log(obstacleArray);
+
+    }
+  },700)
 
   interval2 = setInterval(function(){
     for(o of obstacleArray){
@@ -44,7 +48,7 @@ $(document).ready(function(){
 
   },5);
 
-  var yacceleration = 0.05;
+  var yacceleration = 1;
   var yvelocity = -4.5;
 
   var ypos = 270;
@@ -57,8 +61,8 @@ $(document).ready(function(){
        if(e.keyCode == 32){
          jump();
          jumping = true;
-         yacceleration = 0.05;
-         yvelocity = -4.5;
+         yacceleration = 0.08;
+         yvelocity = -5;
          ypos = 270;
        }
 
@@ -72,7 +76,7 @@ $(document).ready(function(){
        class: ".barrier",
        left: 0,
        top: 0,
-       xpos: 90
+       xpos: 96
      }
      $("#obstacles").append("<div id='obstacle"+obs+"' class='barrier'></div>")
      $(newObstacle.id).css({"left":"90%"})
