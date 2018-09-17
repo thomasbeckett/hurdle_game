@@ -22,11 +22,16 @@ $(document).ready(function(){
   //obstacle
   var obstacle = $("#obstacle")
 
+  var obstacleLeft;
+  var obstacleRight;
+  var obstacleTop;
+  var obstacleBott;
+
   var yacceleration = 0.05;
   var yvelocity = -4.5;
 
   var ypos = 270;
-  var xpos = 700;
+  var xpos = 90;
 
   var jumping = false;
 
@@ -80,23 +85,33 @@ $(document).ready(function(){
 
 
   function characterPosition(){
-    // Find the left and top edge of the ball
+    // Find the left and top edge of the character
     characterLeft = character.offset().left;
     characterTop = character.offset().top;
 
-    // Find right and bottom edge of the ball
+    // Find right and bottom edge of the character
     characterRight = characterLeft + character.width();
     characterBott = characterTop + character.height();
   };
 
   function boardPosition(){
-    // Find the left and top edge of the ball
+    // Find the left and top edge of the board
     boardLeft = board.offset().left;
     boardTop = board.offset().top;
 
-    // Find right and bottom edge of the ball
+    // Find right and bottom edge of the board
     boardRight = boardLeft + board.width();
     boardBott = boardTop + board.height();
+  }
+
+  function obstaclePosition(){
+    // Find the left and top edge of the obstacle
+    obstacleLeft = obstacle.offset().left;
+    obstacleTop = obstacle.offset().top;
+
+    // Find right and bottom edge of the obstacle
+    obstacleRight = obstacleLeft + obstacle.width();
+    obstacleBott = obstacleTop + obstacle.height();
   }
 
 
@@ -118,16 +133,25 @@ $(document).ready(function(){
     }
   }
 
+  function horizontalCollisions(){
+    if (characterRight >= obstacleLeft && characterBott >= obstacleBott && obstacleLeft >= 100) {
+      console.log("over");
+      clearInterval(interval2)
+    }
+  };
+
 
   function moveObstacle(){
     interval2 = setInterval(function(){
-      boardPosition();
+      obstaclePosition();
+      characterPosition();
       console.log(1);
-      xpos -= 1;
+      xpos -= 0.1;
       obstacle.css({
-        "left": xpos + "px"
+        "left": xpos + "%"
       });
-    });
+        horizontalCollisions();
+    },5);
 
 
 
