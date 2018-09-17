@@ -20,7 +20,17 @@ body {
   bottom: 0;
   left: 100px;
 }
-
-#obstacle{
+.barrier{
+  height:70px;
+  width:30px;
+  background: lime;
+  position: absolute;
+  bottom: 0;
   left: 90%;
 }
+
+
+/* #obstacle0{
+  position: absolute;
+  left: 90%;
+} */

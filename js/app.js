@@ -20,22 +20,58 @@ $(document).ready(function(){
   var boardBott;
 
   //obstacle
-  var obstacle = $("#obstacle")
+  // var obstacle = $("#obstacle")
+  var obs = 0;
 
-  var obstacleLeft;
-  var obstacleRight;
-  var obstacleTop;
-  var obstacleBott;
+  // var obstacleObject = {
+  //   id: "#obstacle",
+  //   class:".barrier",
+  //   left:0,
+  //   top:0,
+  //   xpos: 90
+  // }
+  var obstacleObject = generateObstacle();
+  // console.log(obstacleObject.class);
+  obstacle = $(obstacleObject.class)
+  var newObs = {}
+  var obstacleSpeed = 0.2;
+  var newObs = generateObstacle();
+  $(newObs.id).hide();
+
+
+  interval2 = setInterval(function(){
+    moveObstacle(obstacleObject);
+    setTimeout(function(){
+      $(newObs.id).show();
+      moveObstacle(newObs)
+    },2000);
+  },5);
+
 
   var yacceleration = 0.05;
   var yvelocity = -4.5;
 
   var ypos = 270;
-  var xpos = 90;
+
 
   var jumping = false;
 
-  moveObstacle();
+
+  function generateObstacle(){
+    var newId = "#obstacle" + obs
+    var newObstacle = {
+      id: newId,
+      class: ".barrier",
+      left: 0,
+      top: 0,
+      xpos: 90
+    }
+    $("#obstacles").append("<div id='obstacle"+obs+"' class='barrier'></div>")
+    $(newObstacle.id).css({"left":"90%"})
+    obs++
+    return(newObstacle);
+  }
+
 
   if(jumping == false) {
      $("body").keydown(function (e) {
@@ -60,11 +96,9 @@ $(document).ready(function(){
 
 
       //on spacebar move the character
-
       setCharPos();
       move();
       verticalCollisions();
-
       //move the obstacles
 
     },5)
@@ -104,14 +138,15 @@ $(document).ready(function(){
     boardBott = boardTop + board.height();
   }
 
-  function obstaclePosition(){
+  function obstaclePosition(object){
     // Find the left and top edge of the obstacle
-    obstacleLeft = obstacle.offset().left;
-    obstacleTop = obstacle.offset().top;
+    object.left = $(object.class).offset().left;
+    object.top = $(object.class).offset().top;
+
 
     // Find right and bottom edge of the obstacle
-    obstacleRight = obstacleLeft + obstacle.width();
-    obstacleBott = obstacleTop + obstacle.height();
+    // obstacleRight = obstacleLeft + obstacle.width();
+    // obstacleBott = obstacleTop + obstacle.height();
   }
 
 
@@ -133,30 +168,37 @@ $(document).ready(function(){
     }
   }
 
-  function horizontalCollisions(){
-    if (characterRight >= obstacleLeft && characterBott >= obstacleBott && obstacleLeft >= 100) {
+  function horizontalCollisions(object){
+    if (characterRight >= object.left && characterBott >= object.top && object.left >= 100) {
       console.log("over");
       clearInterval(interval2)
     }
   };
 
 
-  function moveObstacle(){
-    interval2 = setInterval(function(){
-      obstaclePosition();
+  function moveObstacle(object){
+    // interval2 = setInterval(function(){
+      obstaclePosition(object);
+      // console.log(object);
       characterPosition();
-      console.log(1);
-      xpos -= 0.1;
-      obstacle.css({
-        "left": xpos + "%"
+      object.xpos -= obstacleSpeed;
+      // console.log(object.id);
+      $(object.id).css({
+        "left": object.xpos + "%"
       });
-        horizontalCollisions();
-    },5);
+      horizontalCollisions(object);
+      // hideCheck(object);
+    // },5);
 
 
 
   };
 
+  function hideCheck(object){
+    if(object.left <= 60){
+      $(object.id).hide();
+    }
+  }
 
 
 
