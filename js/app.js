@@ -162,7 +162,7 @@ $(document).ready(function(){
 
   function horizontalCollisions(object){
     //if object and character collide end the game
-    if (characterRight >= object.left && characterBott >= object.top && object.left>= 100) {
+    if (characterRight >= object.left && characterBott >= object.top && object.left > 130) {
       console.log("over");
       clearInterval(interval2)
       obstacleSpeed=0;
