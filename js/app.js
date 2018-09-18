@@ -2,6 +2,7 @@ $(document).ready(function(){
 
   var interval;
   var interval2;
+  var interval3;
 
   //character
   var character = $("#character");
@@ -22,21 +23,18 @@ $(document).ready(function(){
   //obstacle
   var obs = 0;
 
-  // var obstacleObject = generateObstacle();
-  //
   var obstacleSpeed = 0.2;
 
   // randomly generate obstacles
   var obstacleArray = [];
-  // var newObs = generateObstacle();
-  // obstacleArray.push(newObs);
-  // console.log(obstacleArray);
+  //potention to generate object every 700ms
   interval3 = setInterval(function(){
     var num = Math.random();
+    //70% change to generate object
     if(num < 0.7){
       var newObs = generateObstacle();
       obstacleArray.push(newObs);
-      console.log(obstacleArray);
+      // console.log(obstacleArray);
 
     }
   },700)
@@ -148,6 +146,7 @@ $(document).ready(function(){
     //jump
     if (jumping == true) {
       jumping = false;
+      // $(".character").css({"background": "url(\"../images/hurdler-128x128.gif\")"})
     //land on ground
     }else{
       if (characterBott >= boardBott) {
@@ -163,7 +162,7 @@ $(document).ready(function(){
 
   function horizontalCollisions(object){
     //if object and character collide end the game
-    if (characterRight >= object.left && characterBott >= object.top && object.left >= 100) {
+    if (characterRight >= object.left && characterBott >= object.top && object.left>= 100) {
       console.log("over");
       clearInterval(interval2)
       obstacleSpeed=0;
@@ -196,7 +195,8 @@ $(document).ready(function(){
 
   function hideCheck(object){
     if(object.left <=50){
-      $(object.id).hide();
+      $(object.id).remove();
+      obstacleArray.splice(0,1)
     }
   }
 

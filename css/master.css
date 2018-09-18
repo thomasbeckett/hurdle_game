@@ -16,10 +16,14 @@ body {
   height:70px;
   width:30px;
   background: lime;
+  background-size: contain;
+  background-position: bottom;
   position: absolute;
   bottom: 0;
   left: 100px;
 }
+
+
 .barrier{
   height:70px;
   width:30px;
@@ -28,9 +32,3 @@ body {
   bottom: 0;
   left: 90%;
 }
-
-
-/* #obstacle0{
-  position: absolute;
-  left: 90%;
-} */
