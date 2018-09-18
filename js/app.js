@@ -77,7 +77,7 @@ $(document).ready(function(){
           jumping = true;
           yacceleration = 0.1;
           yvelocity = -6.3;
-          ypos = 305;
+          ypos = 289;
           pressed = true;
         }
 
@@ -168,7 +168,7 @@ $(document).ready(function(){
       //jump
       if (jumping == true) {
         jumping = false;
-        $(".character").css({"background": "url(images/hurdler.gif)","background-size":"cover","background-position":"bottom"})
+      
 
       //land on ground
       }else{
@@ -176,10 +176,10 @@ $(document).ready(function(){
           clearInterval(interval);
         yvelocity = 0;
         yacceleration = 0;
-        ypos = 305;
+        ypos = 289;
         setCharPos();
         pressed = false;
-        $(".character").css({"background": "url(images/runner.gif)","background-size":"cover","background-position":"bottom"})
+
         }
       }
     }
@@ -192,6 +192,11 @@ $(document).ready(function(){
         obstacleSpeed=0;
         clearInterval(interval2)
         clearInterval(interval3)
+        $("img").attr('src', 'images/dead.gif');
+        $("img").css({"height":"30px","width":"auto"})
+        $(".character").css({"top":"300px"})
+
+
       }
     };
 

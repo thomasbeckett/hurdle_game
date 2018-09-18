@@ -7,20 +7,29 @@ body {
   width:90vw;
   height:360px;
   margin: 10% auto;
-  background: #999;
-  border-radius: 1em;
+  background: white;
+  /* border-radius: 1em; */
+  border-bottom: red 5px solid;
   position: relative;
 }
 
 .character{
-  height:50px;
+  height:70px;
   width:30px;
-  background: url("../images/runner.gif");
-  background-size: cover;
+  /* background: url("../images/running-man.gif"); */
+  background-size: contain;
   background-position: bottom;
   position: absolute;
   bottom: 0;
   left: 100px;
+  display:flex;
+}
+
+img{
+  width:30px;
+  position:absolute;
+  right:0;
+  bottom:0;
 }
 
 
