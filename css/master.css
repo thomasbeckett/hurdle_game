@@ -35,8 +35,8 @@ body {
 }
 
 .character{
-  height:70px;
-  width:30px;
+  height:100px;
+  width:60px;
   /* background: url("../images/running-man.gif"); */
   background-size: contain;
   background-position: bottom;
@@ -47,7 +47,7 @@ body {
 }
 
 img{
-  width:30px;
+  width:60px;
   position:absolute;
   right:0;
   bottom:0;

@@ -1,5 +1,18 @@
 $(document).ready(function(){
 
+  var sprite = "player";
+
+  $("#dinosaur").click(function(){
+    sprite = dinosaur;
+  })
+
+  if (sprite == "player") {
+    $("img").attr('src', 'images/running-man.gif');
+    $("img").css({"width":"40px"})
+  }else if(sprite == "dinosaur"){
+    $("img").attr('src', 'images/dinosaur.gif');
+  }
+
   var playing = false;
 
   var interval;
@@ -34,35 +47,40 @@ $(document).ready(function(){
       game();
       playing=true;
       $(".start-game").html("")
+      $(".buttons").css({"display":"none"})
+      if(sprite == "player"){
+        $("img").attr('src', 'images/running-man.gif');
+        $("img").css({"width":"40px"})
+      }else if(sprite == "dinosaur"){
+        $("img").attr('src', 'images/dinosaur-moving.gif');
+      }
     }
   });
-
-
 
     // randomly generate obstacles
     var obstacleArray = [];
     //potention to generate object every 700ms
     function game(){
-    interval3 = setInterval(function(){
-      var num = Math.random();
-      //70% change to generate object
-      if(num < 0.7){
-        var newObs = generateObstacle();
-        obstacleArray.push(newObs);
-        // console.log(obstacleArray);
+      interval3 = setInterval(function(){
+        var num = Math.random();
+        //70% change to generate object
+        if(num < 0.7){
+          var newObs = generateObstacle();
+          obstacleArray.push(newObs);
+          // console.log(obstacleArray);
 
-      }
-    },800)
+        }
+      },800)
 
-    interval2 = setInterval(function(){
+      interval2 = setInterval(function(){
 
       for(o of obstacleArray){
         moveObstacle(o)
       }
       $("#score").html(score)
 
-    },5);
-  }
+      },5);
+    }
 
     var yacceleration = 1;
     var yvelocity = -4.5;
@@ -80,7 +98,7 @@ $(document).ready(function(){
           jumping = true;
           yacceleration = 0.1;
           yvelocity = -6.3;
-          ypos = 289;
+          ypos = 259;
           pressed = true;
         }
 
@@ -179,7 +197,7 @@ $(document).ready(function(){
           clearInterval(interval);
         yvelocity = 0;
         yacceleration = 0;
-        ypos = 289;
+        ypos = 259;
         setCharPos();
         pressed = false;
 
@@ -195,9 +213,13 @@ $(document).ready(function(){
         clearInterval(interval2)
         clearInterval(interval3)
         obstacleSpeed=0;
-        $("img").attr('src', 'images/dead.gif');
-        $("img").css({"height":"30px","width":"auto"})
-        $(".character").css({"top":"300px"})
+        if(sprite == "player"){
+          $("img").attr('src', 'images/dead.gif');
+          $("img").css({"height":"40px","width":"auto"})
+          $(".character").css({"top":"275px"})
+        }else if(sprite == "dinosaur"){
+          $("img").attr('src', 'images/dinosaur.gif');
+        }
 
 
       }
