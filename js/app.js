@@ -1,17 +1,43 @@
 $(document).ready(function(){
 
   var sprite = "player";
+  changeSprite();
 
   $("#dinosaur").click(function(){
-    sprite = dinosaur;
+    sprite = "dinosaur";
+    changeSprite();
+  })
+  $("#player").click(function(){
+    sprite = "player";
+    changeSprite();
+  })
+  $("#batman").click(function(){
+    sprite = "batman";
+    changeSprite();
+  })
+  $("#kid").click(function(){
+    sprite = "kid";
+    changeSprite();
   })
 
-  if (sprite == "player") {
-    $("img").attr('src', 'images/running-man.gif');
-    $("img").css({"width":"40px"})
-  }else if(sprite == "dinosaur"){
-    $("img").attr('src', 'images/dinosaur.gif');
+
+  function changeSprite(){
+    if (sprite == "player") {
+      $("img").attr('src', 'images/running-man.gif');
+      $("img").css({"width":"40px","bottom":"0","left":"0"})
+    }else if(sprite == "dinosaur"){
+      $("img").attr('src', 'images/dinosaur.gif');
+      $("img").css({"width":"60px","right":"0","bottom":"0","left":"-17px"})
+    }else if(sprite == "kid"){
+      $("img").attr('src', 'images/running-kid.gif');
+      $("img").css({"width":"120px","position":"absolute","left":"-40px","bottom":"0"})
+    }else if(sprite == "batman"){
+      $("img").attr('src', 'images/batman.gif');
+      $("img").css({"width":"120px","position":"absolute","left":"-40px", "bottom":"-10px"})
+    }
+
   }
+
 
   var playing = false;
 
@@ -53,6 +79,7 @@ $(document).ready(function(){
         $("img").css({"width":"40px"})
       }else if(sprite == "dinosaur"){
         $("img").attr('src', 'images/dinosaur-moving.gif');
+
       }
     }
   });
@@ -252,7 +279,7 @@ $(document).ready(function(){
         $(object.id).remove();
         obstacleArray.splice(0,1)
         score++
-        obstacleSpeed += 0.001;
+        obstacleSpeed += 0.005;
       }
     }
 
