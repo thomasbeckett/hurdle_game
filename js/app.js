@@ -33,14 +33,16 @@ $(document).ready(function(){
     if(e.keyCode == 32 && playing == false){
       game();
       playing=true;
+      $(".start-game").html("")
     }
   });
-  function game(){
+
 
 
     // randomly generate obstacles
     var obstacleArray = [];
     //potention to generate object every 700ms
+    function game(){
     interval3 = setInterval(function(){
       var num = Math.random();
       //70% change to generate object
@@ -60,6 +62,7 @@ $(document).ready(function(){
       $("#score").html(score)
 
     },5);
+  }
 
     var yacceleration = 1;
     var yvelocity = -4.5;
@@ -107,7 +110,8 @@ $(document).ready(function(){
        return(newObstacle);
      }
 
-    function jump(){
+
+     function jump(){
 
       interval = setInterval(function(){
         //get positions
@@ -123,7 +127,6 @@ $(document).ready(function(){
 
       },5)
     }
-
     function setCharPos(){
       character.css({
         "top": ypos + "px"
@@ -168,7 +171,7 @@ $(document).ready(function(){
       //jump
       if (jumping == true) {
         jumping = false;
-      
+
 
       //land on ground
       }else{
@@ -188,10 +191,10 @@ $(document).ready(function(){
       //if object and character collide end the game
       if (characterRight >= object.left && characterBott >= object.top && object.left > 140-object.width) {
         console.log("over");
-        clearInterval(interval2)
-        obstacleSpeed=0;
+        clearInterval(interval)
         clearInterval(interval2)
         clearInterval(interval3)
+        obstacleSpeed=0;
         $("img").attr('src', 'images/dead.gif');
         $("img").css({"height":"30px","width":"auto"})
         $(".character").css({"top":"300px"})
@@ -232,6 +235,5 @@ $(document).ready(function(){
     }
 
 
-  }
 
 });
