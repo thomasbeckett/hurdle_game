@@ -37,7 +37,7 @@ $(document).ready(function(){
       // console.log(obstacleArray);
 
     }
-  },700)
+  },800)
 
   interval2 = setInterval(function(){
     for(o of obstacleArray){
@@ -62,26 +62,30 @@ $(document).ready(function(){
         jumping = true;
         yacceleration = 0.08;
         yvelocity = -5;
-        ypos = 270;
+        ypos = 305;
         pressed = true;
       }
 
     });
   }
 
-   function generateObstacle(){
+  function generateObstacle(){
      //get a new obstacle id
      var newId = "#obstacle" + obs
+     ranHeight = Math.floor(Math.random()*(120-50)+50)
+     console.log(ranHeight);
      //create a new object
      var newObstacle = {
        id: newId,
        class: ".barrier",
        left: 0,
        top: 0,
-       xpos: 96
+       xpos: 96,
+       height: ranHeight
      }
      //create a new div
      $("#obstacles").append("<div id='obstacle"+obs+"' class='barrier'></div>")
+     $(newObstacle.id).css({"height":newObstacle.height})
      obs++
      return(newObstacle);
    }
@@ -97,6 +101,7 @@ $(document).ready(function(){
       setCharPos();
       move();
       verticalCollisions();
+
 
 
     },5)
@@ -146,16 +151,18 @@ $(document).ready(function(){
     //jump
     if (jumping == true) {
       jumping = false;
-      // $(".character").css({"background": "url(\"../images/hurdler-128x128.gif\")"})
+      $(".character").css({"background": "url(images/hurdler.gif)","background-size":"cover","background-position":"bottom"})
+
     //land on ground
     }else{
       if (characterBott >= boardBott) {
         clearInterval(interval);
       yvelocity = 0;
       yacceleration = 0;
-      ypos = 290;
+      ypos = 305;
       setCharPos();
       pressed = false;
+      $(".character").css({"background": "url(images/runner.gif)","background-size":"cover","background-position":"bottom"})
       }
     }
   }
