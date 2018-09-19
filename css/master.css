@@ -1,7 +1,8 @@
 body {
   text-align: center;
-  margin: 100px auto;
-  font-family: Helvetica
+  margin: auto;
+  margin-top:11vh;
+  font-family: "Open Sans","Trebuchet MS",Helvetica,sans-serif;
 }
 
 h2{
@@ -9,7 +10,7 @@ h2{
 }
 /* Scoreboard */
 .scoreboard{
-  margin: -50px 0 -90px 0;
+  margin-bottom: 20px;
   font-size: 15px;
   display: flex;
   justify-content: center;
@@ -22,6 +23,7 @@ h2{
   width:90vw;
   height:360px;
   margin: 10% auto;
+  margin-top:0;
   border-bottom: #ce0f00 5px solid;
   position: relative;
 }

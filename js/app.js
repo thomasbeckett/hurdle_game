@@ -56,6 +56,8 @@ $(document).ready(function(){
   var movObs;
   var genObs;
 
+  var genInterval = 800;
+
   // score start
   var score;
   var day_night;
@@ -126,6 +128,7 @@ $(document).ready(function(){
 
       score = 0;
       day_night = 0;
+      genInterval = 800;
 
       playing=true;
 
@@ -171,10 +174,8 @@ $(document).ready(function(){
       if(num < 0.7){
         var newObs = generateObstacle();
         obstacleArray.push(newObs);
-
-
       }
-    },800)
+    },genInterval)
     // move obstacles in the array and update the score
     movObs = setInterval(function(){
 
@@ -325,6 +326,7 @@ $(document).ready(function(){
 
       playing = false;
       obstacleSpeed=0;
+      genInterval = 800;
 
       if (high_score<score) {
         high_score = score;
@@ -358,7 +360,9 @@ $(document).ready(function(){
       obstacleSpeed += 0.008;
       if (score % 10 == 0) {
         day_night++
-
+      }
+      if (genInterval >= 20){
+        genInterval -= 10;
       }
     }
   }
