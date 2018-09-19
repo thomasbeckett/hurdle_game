@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+  // Sprites
+
   var sprite = "player";
   changeSprite();
 
@@ -21,29 +23,18 @@ $(document).ready(function(){
   })
 
 
-  function changeSprite(){
-    if (sprite == "player") {
-      $("img").attr('src', 'images/running-man.gif');
-      $("img").css({"width":"40px","bottom":"0","left":"0"})
-    }else if(sprite == "dinosaur"){
-      $("img").attr('src', 'images/dinosaur.gif');
-      $("img").css({"width":"60px","right":"0","bottom":"0","left":"-17px"})
-    }else if(sprite == "kid"){
-      $("img").attr('src', 'images/running-kid.gif');
-      $("img").css({"width":"120px","position":"absolute","left":"-40px","bottom":"0"})
-    }else if(sprite == "batman"){
-      $("img").attr('src', 'images/batman.gif');
-      $("img").css({"width":"120px","position":"absolute","left":"-40px", "bottom":"-10px"})
-    }
-
-  }
 
 
+  // Game
+  // set up variables
   var playing = false;
 
+  //intervals
   var interval;
   var interval2;
   var interval3;
+
+  // score start
   var score = 0;
 
   //character
@@ -67,58 +58,41 @@ $(document).ready(function(){
 
   var obstacleSpeed = 0.2;
 
-
+  // on spacebar and if the game is not running
+  // start the game and change relevant gifs
   $("body").keydown(function (e) {
     if(e.keyCode == 32 && playing == false){
+      // start the game
       game();
       playing=true;
+      // hide the instructions and the buttons
       $(".start-game").html("")
       $(".buttons").css({"display":"none"})
+      // change sprite to running sprite
       if(sprite == "player"){
         $("img").attr('src', 'images/running-man.gif');
         $("img").css({"width":"40px"})
       }else if(sprite == "dinosaur"){
         $("img").attr('src', 'images/dinosaur-moving.gif');
-
       }
     }
   });
 
-    // randomly generate obstacles
+    // set up obstacles array
     var obstacleArray = [];
-    //potention to generate object every 700ms
-    function game(){
-      interval3 = setInterval(function(){
-        var num = Math.random();
-        //70% change to generate object
-        if(num < 0.7){
-          var newObs = generateObstacle();
-          obstacleArray.push(newObs);
-          // console.log(obstacleArray);
 
-        }
-      },800)
-
-      interval2 = setInterval(function(){
-
-      for(o of obstacleArray){
-        moveObstacle(o)
-      }
-      $("#score").html(score)
-
-      },5);
-    }
-
-    var yacceleration = 1;
-    var yvelocity = -4.5;
+    // set up variables for character
+    var yacceleration;
+    var yvelocity;
 
     var ypos;
 
     var jumping = false;
     var pressed = false;
 
+    // if the player is already jumping do not jump again
     if(jumping == false){
-      console.log(pressed);
+      // on spacebar jump
       $("body").keydown(function (e) {
         if(e.keyCode == 32 && pressed == false){
           jump();
@@ -131,12 +105,84 @@ $(document).ready(function(){
 
       });
     }
+    function changeSprite(){
+    if (sprite == "player") {
+      $("img").attr('src', 'images/running-man.gif');
+      $("img").css({"width":"40px","bottom":"0","left":"0"})
+    }else if(sprite == "dinosaur"){
+      $("img").attr('src', 'images/dinosaur.gif');
+      $("img").css({"width":"60px","right":"0","bottom":"0","left":"-17px"})
+    }else if(sprite == "kid"){
+      $("img").attr('src', 'images/running-kid.gif');
+      $("img").css({"width":"120px","position":"absolute","left":"-40px","bottom":"0"})
+    }else if(sprite == "batman"){
+      $("img").attr('src', 'images/batman.gif');
+      $("img").css({"width":"120px","position":"absolute","left":"-40px", "bottom":"-10px"})
+    }
+
+  }
+    // game function
+    // generate and move obstacles and update the score
+    function game(){
+
+      //potention to generate object every 800ms
+      interval3 = setInterval(function(){
+        var num = Math.random();
+        //70% change to generate object
+        if(num < 0.7){
+          var newObs = generateObstacle();
+          obstacleArray.push(newObs);
+          // console.log(obstacleArray);
+
+        }
+      },800)
+      // move obstacles in the array and update the score
+      interval2 = setInterval(function(){
+
+        for(o of obstacleArray){
+          moveObstacle(o)
+        }
+        $("#score").html(score)
+
+      },5);
+    }
 
     function generateObstacle(){
        //get a new obstacle id
        var newId = "#obstacle" + obs
-       var ranHeight = Math.floor(Math.random()*(120-50)+50)
-       var ranWidth = Math.floor(Math.random()*(50-10)+10)
+       // get random heights and widths
+       var ranHeight = Math.floor(Math.random()*(3))
+       switch (ranHeight) {
+        case 0:
+          ranHeight = 50;
+          break;
+        case 1:
+          ranHeight = 80;
+          break;
+        case 2:
+          ranHeight = 110;
+          break;
+         default:
+          break;
+
+       }
+
+       var ranWidth = Math.floor(Math.random()*(3))
+       switch (ranWidth) {
+        case 0:
+          ranWidth = 10;
+          break;
+        case 1:
+          ranWidth = 30;
+          break;
+        case 2:
+          ranWidth = 60;
+          break;
+         default:
+         ranWidht = 10;
+           break;
+       }
+
        //create a new object
        var newObstacle = {
          id: newId,
@@ -155,8 +201,7 @@ $(document).ready(function(){
        return(newObstacle);
      }
 
-
-     function jump(){
+    function jump(){
 
       interval = setInterval(function(){
         //get positions
@@ -172,6 +217,7 @@ $(document).ready(function(){
 
       },5)
     }
+
     function setCharPos(){
       character.css({
         "top": ypos + "px"
@@ -210,8 +256,6 @@ $(document).ready(function(){
 
     }
 
-
-
     function verticalCollisions(){
       //jump
       if (jumping == true) {
@@ -242,7 +286,7 @@ $(document).ready(function(){
         obstacleSpeed=0;
         if(sprite == "player"){
           $("img").attr('src', 'images/dead.gif');
-          $("img").css({"height":"40px","width":"auto"})
+          $("img").css({"height":"40px","width":"auto","left":"-85px"})
           $(".character").css({"top":"275px"})
         }else if(sprite == "dinosaur"){
           $("img").attr('src', 'images/dinosaur.gif');
@@ -251,7 +295,6 @@ $(document).ready(function(){
 
       }
     };
-
 
     function moveObstacle(object){
 

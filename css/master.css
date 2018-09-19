@@ -16,7 +16,7 @@ body {
      transform: translate3d(0, 0, 0);
    }
    100%{
-     transform: translate3d(-1692px, 0, 0); /* The image width */
+     transform: translate3d(-1920px, 0, 0); /* The image width */
    }
 }
 
@@ -29,8 +29,8 @@ body {
 
 .sliding-background{
   height: 1000px;
-  width:4760px;
-  background: linear-gradient(rgba(255,255,255,0.95), rgba(255,255,255, 0.5)), url("../images/clouds-background.png");
+  width:5760px;
+  background: linear-gradient(rgba(255,255,255,0.95), rgba(255,255,255, 0.1)), url("../images/clouds-background.png");
   animation: slide 60s linear infinite;
 }
 
