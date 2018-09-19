@@ -8,12 +8,13 @@
     <script src="js/app.js" charset="utf-8"></script>
   </head>
   <body>
+    <div class="scoreboard"><h2>High Score: <span id="high_score"></span></h2><h2><span> Score: <span id="score"></span></h2></div>
     <div id = "container" class="container">
       <div class="background-container">
-        <div class="scoreboard"><h2>Score: <span id="score"></span></h2></div>
         <div class="sliding-background"></div>
 
       </div>
+      <div id="restart"><h2>GAME OVER</h2></div>
       <div id="character" class="character">
         <img class="player"src="images/dinosaur.gif" alt="">
       </div>
@@ -23,10 +24,10 @@
         <h2>Press SPACE to Start</h2>
       </div>
       <div class="buttons">
-        <button id="dinosaur" type="button" name="button">Dinosaur</button>
-        <button id="player" type="button" name="button">Player</button>
-        <button id="batman" type="button" name="button">Batman</button>
-        <button id="kid" type="button" name="button">Kid</button>
+        <button id="dinosaur" class="btn" type="button" name="button">Dinosaur</button>
+        <button id="player" class="btn" type="button" name="button">Player</button>
+        <button id="batman" class="btn" type="button" name="button">Batman</button>
+        <button id="kid" class="btn" type="button" name="button">Kid</button>
       </div>
     </div>
 
