@@ -46,7 +46,7 @@ body {
   display:flex;
 }
 
-img{
+.player{
   width:60px;
   position:absolute;
   /* right:0;
@@ -57,8 +57,8 @@ img{
 .barrier{
   /* height:70px; */
   /* width:30px; */
-  background: black;
-  background-size: cover;
+  /* background: url("../images/cactus2.gif"); */
+  background-size: contain;
   background-position: bottom;
   position: absolute;
   bottom: 0;
