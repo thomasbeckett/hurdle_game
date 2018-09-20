@@ -25,5 +25,5 @@
 <p>Tom Beckett</p>
 
 ##Acknowledgements
-Inspired by Google Chrome Dinosaur Game
+<p>Inspired by Google Chrome Dinosaur Game</p>
 
