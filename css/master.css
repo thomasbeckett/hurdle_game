@@ -78,17 +78,20 @@ h2{
 /* Change character buttons */
 .buttons{
   margin: auto;
-  width:25vw;
+  width:40vw;
   display:flex;
-  justify-content:space-between;
+  justify-content:center;
 
 }
 .btn{
+  width: 80px;
   padding: 10px;
   border-radius: 10%;
   background: blue;
   color: white;
   border: blue 1px solid;
+  text-align: center;
+  margin: 0 3px;
 }
 
 /* Animations */

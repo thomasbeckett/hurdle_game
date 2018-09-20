@@ -97,6 +97,10 @@ $(document).ready(function(){
   // set up obstacles array
   var obstacleArray = [];
 
+  //sounds
+  var mySound;
+  mySound = new Audio("sounds/zapsplat_multimedia_game_bounce_jump_008_17652.mp3");
+
   // on spacebar and if the game is not running
   //////////////////////////////////////////////////////
   //////////////////////////////////////////////////////
@@ -156,6 +160,7 @@ $(document).ready(function(){
         yvelocity = -6.6;
         ypos = 259;
         pressed = true;
+        mySound.play();
       }
 
     });
@@ -451,7 +456,7 @@ $(document).ready(function(){
         }
 
         clearInterval(jumpInt);
-      //reset character variables 
+      //reset character variables
       yvelocity = 0;
       yacceleration = 0;
       ypos = 259;
