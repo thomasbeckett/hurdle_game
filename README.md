@@ -5,6 +5,9 @@
 
 ## How to play
 
+Go and play now at [thomasbeckett.github.io/hurdle_game](https://thomasbeckett.github.io/hurdle_game)
+<p><sub>This game was designed for Google Chrome and using other browsers may reduce the user experience</sub></p>
+
 1. To start the game press the Spacebar
 2. Spacebar allows the character to jump in the air
 3. Jump over objects as they come towards the character

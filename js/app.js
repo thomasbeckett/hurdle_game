@@ -98,8 +98,7 @@ $(document).ready(function(){
   var obstacleArray = [];
 
   //sounds
-  var mySound;
-  mySound = new Audio("sounds/zapsplat_multimedia_game_bounce_jump_008_17652.mp3");
+  var mySound = new Audio("sounds/zapsplat_multimedia_game_bounce_jump_008_17652.mp3");
 
   // on spacebar and if the game is not running
   //////////////////////////////////////////////////////
