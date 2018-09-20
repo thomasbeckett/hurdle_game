@@ -37,7 +37,7 @@ Usually double-clicking the file name opens the file in your default web browser
  
 
 
-## Autors
+## Authors
 <p>Tom Beckett</p>
 
 ## Acknowledgements
