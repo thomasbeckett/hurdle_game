@@ -260,9 +260,11 @@ $(document).ready(function(){
 
      $(".barrier-img"+obs).css({"height": newObstacle.height,"float":"left"})
      if (sprite == "player") {
+       //custom styling for the hurdle sprites, pushes down to give better look
        $(".barrier-img"+obs).css({"width": newObstacle.width,"top":"309px","height":newObstacle.height+10})
 
      }else{
+       //styling for cacti to display multiple cacti properly
        if (newObstacle.width == 100) {
          $(".barrier-img"+obs).css({"width": 33,"float":"left"})
        }else if(newObstacle.width == 76){
@@ -279,33 +281,21 @@ $(document).ready(function(){
 
   function moveObstacle(object){
 
-      //get postitions
-      obstaclePosition(object);
-      characterPosition();
+    //get postitions
+    obstaclePosition(object);
+    characterPosition();
 
-      object.xpos -= obstacleSpeed;
-      //set object position
-      $(object.id).css({
-        "left": object.xpos + "%"
-      });
-      //check if object has collided
-      horizontalCollisions(object);
+    object.xpos -= obstacleSpeed;
+    //set object position
+    $(object.id).css({
+      "left": object.xpos + "%"
+    });
+    //check if object has collided
+    horizontalCollisions(object);
 
-      //check if object is out of the container
-      hideCheck(object);
+    //check if object is out of the container
+    hideCheck(object);
 
-
-
-  };
-
-  function characterPosition(){
-    // Find the left and top edge of the character
-    characterLeft = character.offset().left;
-    characterTop = character.offset().top;
-
-    // Find right and bottom edge of the character
-    characterRight = characterLeft + character.width();
-    characterBott = characterTop + character.height();
   };
 
   function obstaclePosition(object){
@@ -320,21 +310,26 @@ $(document).ready(function(){
     if (characterRight >= object.left && characterBott >= object.top && object.left > 140-object.width) {
       console.log("over");
 
+      //clear intevals
       clearInterval(jumpInt)
       clearInterval(movObs)
       clearInterval(genObs)
 
+      //reset variables
       playing = false;
       obstacleSpeed=0;
       genInterval = 800;
 
+      //update highscore
       if (high_score<score) {
         high_score = score;
 
       }
 
+      //show restart text
       $("#restart").show();
 
+      //show dead sprites
       if(sprite == "player"){
         player_img.attr('src', 'images/dead.gif');
         player_img.css({"height":"40px","width":"auto","left":"-85px"})
@@ -344,7 +339,7 @@ $(document).ready(function(){
       }else if(sprite == "dinosaur"){
         player_img.attr('src', 'images/dinosaur.gif');
       }
-
+      //show buttons and instruction text
       $(".start-game").html("<h2>SPACE to Try Again</h2>")
       $(".start-game").show()
       $(".buttons").show()
@@ -353,9 +348,12 @@ $(document).ready(function(){
   };
 
   function hideCheck(object){
+    //check if the obstacle is out of the container
     if(object.left <=50){
+      //remove the object
       $(object.id).remove();
       obstacleArray.splice(0,1)
+      //increase the score and the speed
       score++
       obstacleSpeed += 0.008;
       if (score % 10 == 0) {
@@ -368,8 +366,10 @@ $(document).ready(function(){
   }
 
   function dayNight(){
+    //update the background for night/day
     if (day_night % 2 != 0) {
       $(".sliding-background").css({"background":"linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0, 0.4)), url(\"images/clouds-background.png\")"});
+      //update restart text to white for better readability
       $("#restart").css({"color":"white"})
     }else{
       $(".sliding-background").css({
@@ -382,6 +382,25 @@ $(document).ready(function(){
   /////////////////////////////////////
   //Character functions
   ////////////////////////////////////
+  function characterPosition(){
+    // Find the left and top edge of the character
+    characterLeft = character.offset().left;
+    characterTop = character.offset().top;
+
+    // Find right and bottom edge of the character
+    characterRight = characterLeft + character.width();
+    characterBott = characterTop + character.height();
+  };
+
+  function boardPosition(){
+    // Find the left and top edge of the board
+    boardLeft = board.offset().left;
+    boardTop = board.offset().top;
+
+    // Find right and bottom edge of the board
+    boardRight = boardLeft + board.width();
+    boardBott = boardTop + board.height();
+  }
 
   function jump(){
 
@@ -400,16 +419,6 @@ $(document).ready(function(){
     },5)
   }
 
-  function boardPosition(){
-    // Find the left and top edge of the board
-    boardLeft = board.offset().left;
-    boardTop = board.offset().top;
-
-    // Find right and bottom edge of the board
-    boardRight = boardLeft + board.width();
-    boardBott = boardTop + board.height();
-  }
-
   function setCharPos(){
     character.css({
       "top": ypos + "px"
@@ -425,6 +434,7 @@ $(document).ready(function(){
     //jump
     if (jumping == true) {
       if(sprite == "player"){
+        //update jumping sprite
         player_img.attr('src', 'images/hurdling-man.gif');
         player_img.css({"width":"70px","height":"90px","bottom":"0","left":"0"})
       }
@@ -434,12 +444,14 @@ $(document).ready(function(){
     //land on ground
     }else{
       if (characterBott >= boardBott) {
+        //change sprite back to running
         if(sprite == "player"){
           player_img.attr('src', 'images/running-man.gif');
           player_img.css({"width":"40px","height":"100px","bottom":"0","left":"0"})
         }
 
         clearInterval(jumpInt);
+      //reset character variables 
       yvelocity = 0;
       yacceleration = 0;
       ypos = 259;
