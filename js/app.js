@@ -147,22 +147,32 @@ $(document).ready(function(){
         player_img.attr('src', 'images/dinosaur-moving.gif');
       }
     }
+    // if the player is already jumping do not jump again
+      // on spacebar jump
+    if(e.keyCode == 32 && pressed == false && jumping == false){
+      jump();
+      jumping = true;
+      yacceleration = 0.1;
+      yvelocity = -6.6;
+      ypos = 259;
+      pressed = true;
+      mySound.play();
+    }
   });
 
-  // if the player is already jumping do not jump again
-    // on spacebar jump
-  $("body").keydown(function (e) {
-      if(e.keyCode == 32 && pressed == false && jumping == false){
-        jump();
-        jumping = true;
-        yacceleration = 0.1;
-        yvelocity = -6.6;
-        ypos = 259;
-        pressed = true;
-        mySound.play();
-      }
 
-    });
+  // $("body").keydown(function (e) {
+  //     if(e.keyCode == 32 && pressed == false && jumping == false){
+  //       jump();
+  //       jumping = true;
+  //       yacceleration = 0.1;
+  //       yvelocity = -6.6;
+  //       ypos = 259;
+  //       pressed = true;
+  //       mySound.play();
+  //     }
+  //
+  //   });
 
   ///////////////////////////////////
   //Obstacle Functions
