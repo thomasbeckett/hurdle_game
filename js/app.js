@@ -108,6 +108,7 @@ $(document).ready(function(){
   //////////////////////////////////////////////////////
   // start the game and change relevant gifs
   $("body").keydown(function (e) {
+    //start the game with spacebar
     if(e.keyCode == 32 && playing == false){
       //clear obstacles
       for (var i = obstacleArray.length-1; i>=0; i--){
@@ -147,6 +148,7 @@ $(document).ready(function(){
         player_img.attr('src', 'images/dinosaur-moving.gif');
       }
     }
+    //jump with spacebar
     // if the player is already jumping do not jump again
       // on spacebar jump
     if(e.keyCode == 32 && pressed == false && jumping == false){
@@ -159,20 +161,6 @@ $(document).ready(function(){
       mySound.play();
     }
   });
-
-
-  // $("body").keydown(function (e) {
-  //     if(e.keyCode == 32 && pressed == false && jumping == false){
-  //       jump();
-  //       jumping = true;
-  //       yacceleration = 0.1;
-  //       yvelocity = -6.6;
-  //       ypos = 259;
-  //       pressed = true;
-  //       mySound.play();
-  //     }
-  //
-  //   });
 
   ///////////////////////////////////
   //Obstacle Functions

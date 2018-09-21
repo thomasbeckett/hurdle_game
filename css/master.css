@@ -1,9 +1,9 @@
 body {
   background: #fafafa;
-  text-align: center;
+  font-family: "Open Sans","Trebuchet MS",Helvetica,sans-serif;
   margin: auto;
   margin-top:11vh;
-  font-family: "Open Sans","Trebuchet MS",Helvetica,sans-serif;
+  text-align: center;
 }
 
 h2{
@@ -11,87 +11,87 @@ h2{
 }
 /* Scoreboard */
 .scoreboard{
-  margin-bottom: 20px;
-  font-size: 15px;
   display: flex;
+  font-size: 15px;
   justify-content: center;
+  margin-bottom: 20px;
 }
 
 /* ------------------ */
 /* Main Content */
 /* ------------------ */
 .container {
-  width:90vw;
+  border-bottom: #ce0f00 5px solid;
   height:360px;
   margin: 10% auto;
   margin-top:0;
-  border-bottom: #ce0f00 5px solid;
   position: relative;
+  width:90vw;
 }
 
 
 /* Background */
 .background-container{
+  height:360px;
   overflow: hidden;
   width:90vw;
-  height:360px;
 }
 .sliding-background{
+  animation: slide 60s linear infinite;
+  background: linear-gradient(rgba(255,255,255,0.95), rgba(255,255,255, 0.1)), url("../images/clouds-background.png");
   height: 1000px;
   width:5760px;
-  background: linear-gradient(rgba(255,255,255,0.95), rgba(255,255,255, 0.1)), url("../images/clouds-background.png");
-  animation: slide 60s linear infinite;
 }
 
 /* Player character*/
 .character{
-  height:100px;
-  width:40px;
-  background-size: contain;
   background-position: bottom;
-  position: absolute;
+  background-size: contain;
   bottom: 0;
-  left: 100px;
   display:flex;
+  height:100px;
+  left: 100px;
+  position: absolute;
+  width:40px;
 }
 .player{
-  width:60px;
   position:absolute;
+  width:60px;
 }
 
 /* Obstacles */
 .barrier{
-  background-size: contain;
   background-position: bottom;
-  position: absolute;
+  background-size: contain;
   bottom: 0;
   left: 90%;
+  position: absolute;
 }
 
 /* Restart Game */
 #restart{
-  position: relative;
   bottom: 250px;
   font-size: 20px;
+  position: relative;
 }
 
 /* Change character buttons */
 .buttons{
-  margin: auto;
-  width:40vw;
   display:flex;
   justify-content:center;
+  margin: auto;
+  width:40vw;
 
 }
 .btn{
-  width: 80px;
-  padding: 10px;
-  border-radius: 10%;
   background: blue;
-  color: white;
   border: blue 1px solid;
-  text-align: center;
+  border-radius: 10%;
+  color: white;
   margin: 0 3px;
+  padding: 10px;
+  text-align: center;
+  width: 80px;
 }
 
 /* Animations */
